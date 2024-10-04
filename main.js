@@ -112,3 +112,18 @@ for(const pers of array){
     }
  
 }
+
+const form = document.getElementById("form");
+form.addEventListener("submit", function(e){
+    const lastname =getElementById("lastname");
+    const firstname1 =getElementById("firstname1");
+    const firstname2 =getElementById("firstname2");
+    const married =getElementById("married");
+    const pet =getElementById("pet");
+
+    const lastnamevalue=lastname.value;
+    const firrstname1value=firstname1.value;
+    const firstname2value=firstname2.value;
+    const marriedvalue=married.checked;
+    const petvalue=pet.value;
+})
