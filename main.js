@@ -59,6 +59,34 @@ const th_pet=document.createElement('th');
 tr.appendChild(th_pet);
 th_pet.innerHTML="Háziálata";
 
+
+function validatefields(lastnamehtml,firstname1html,pethtml){
+    let result=true
+   if(lastnamehtml.value === ""){
+    const apa = lastnamehtml.parentElement;
+ 
+    const errorka=apa.querySelector(`.error`);
+    errorka.innerHTML="Kötelező!";
+     result=false;
+   }
+   if(firstname1html.value === ""){
+    const apa = firstname1html.parentElement;
+ 
+    const errorka=apa.querySelector(".error");
+    errorka.innerHTML="Kötelező!";
+     result=false;
+   }
+   if(pethtml.value === ""){
+    const apa = pethtml.parentElement;
+ 
+    const errorka=apa.querySelector(".error");
+    errorka.innerHTML="Kötelező!";
+     result=false;
+   }
+   return result;
+
+}
+
 const form = document.getElementById("form");
 form.addEventListener("submit", function(e){
     e.preventDefault();
@@ -74,20 +102,22 @@ form.addEventListener("submit", function(e){
     const marriedvalue=married.checked;
     const petvalue=pet.value;
 
-    if (firstname2value===""){
-        firstname2value=undefined;
+    if(validatefields(lastname, firstname1, pet)){
+        if (firstname2value===""){
+            firstname2value=undefined;
+        }
+        const newperson={
+            firstname1: firstname1value,
+            firstname2: firstname2value,
+            lastname: lastnamevalue,
+            married: marriedvalue,
+            pet: petvalue
+        }
+    
+        array.push(newperson);
+        console.log(array);
+        rendertable();
     }
-    const newperson={
-        firstname1: firstname1value,
-        firstname2: firstname2value,
-        lastname: lastnamevalue,
-        married: marriedvalue,
-        pet: petvalue
-    }
-
-    array.push(newperson);
-    console.log(array);
-    rendertable();
     
 })
 rendertable();
