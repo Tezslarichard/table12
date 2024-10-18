@@ -38,26 +38,15 @@ table.appendChild(thead);
 const tr = document.createElement('tr');
 thead.appendChild(tr);
  
-const th_lastname = document.createElement('th');
-tr.appendChild(th_lastname);
-th_lastname.innerHTML='vezetéknév';
- 
-const th_firstname = document.createElement('th');
-tr.appendChild(th_firstname);
-th_firstname.innerHTML='keresztnév';
- 
-th_firstname.colSpan=2;
+//th_firstname.colSpan=2;
  
 const tbody = document.createElement('tbody');
 table.appendChild(tbody);
 
-const th_married=document.createElement('th');
-tr.appendChild(th_married);
-th_married.innerHTML="Házas";
-
-const th_pet=document.createElement('th');
-tr.appendChild(th_pet);
-th_pet.innerHTML="Háziálata";
+createTableCell("th",'Vezetéknév',tr);
+createTableCell("th",'Keresztnév',tr);
+createTableCell("th",'Házas',tr);
+createTableCell("th",'Állat',tr);
 
 
 function validatefields(lastnamehtml,firstname1html,pethtml){
@@ -85,6 +74,17 @@ function validatefields(lastnamehtml,firstname1html,pethtml){
    }
    return result;
 
+}
+/**
+ * 
+ * @param {'td' | 'th'} tagName 
+ * @param {string} innerHTML 
+ * @param {HTMLTableRowElement} parentElement 
+ */
+function createTableCell(tagName, innerHTML, parentElement){
+    const element = document.createElement(tagName);
+    element.innerHTML = innerHTML;
+    parentElement.appendChild(element);
 }
 
 const form = document.getElementById("form");
