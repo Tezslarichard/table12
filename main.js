@@ -92,6 +92,7 @@ function createTableCell(tagName, innerHTML, parentElement){
     const element = document.createElement(tagName);
     element.innerHTML = innerHTML;
     parentElement.appendChild(element);
+    return element
 }
 
 const form = document.getElementById("form");
