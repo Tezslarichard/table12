@@ -38,15 +38,16 @@ table.appendChild(thead);
 const tr = document.createElement('tr');
 thead.appendChild(tr);
  
-//th_firstname.colSpan=2;
  
 const tbody = document.createElement('tbody');
 table.appendChild(tbody);
 
 createTableCell("th",'Vezetéknév',tr);
-createTableCell("th",'Keresztnév',tr);
+const keresztnev_createtablecell= createTableCell("th",'Keresztnév',tr);
 createTableCell("th",'Házas',tr);
 createTableCell("th",'Állat',tr);
+
+keresztnev_createtablecell.colSpan=2;
 
 
 function validatefields(lastnamehtml,firstname1html,pethtml){
@@ -55,23 +56,29 @@ function validatefields(lastnamehtml,firstname1html,pethtml){
     const apa = lastnamehtml.parentElement;
  
     const errorka=apa.querySelector(`.error`);
-    errorka.innerHTML="Kötelező!";
+    errorka.innerHTML="Kötelező vezetéknevet adni!";
      result=false;
    }
+
+
    if(firstname1html.value === ""){
     const apa = firstname1html.parentElement;
  
     const errorka=apa.querySelector(".error");
-    errorka.innerHTML="Kötelező!";
+    errorka.innerHTML="Kötelező keresztnevet adni!";
      result=false;
    }
+
+
    if(pethtml.value === ""){
     const apa = pethtml.parentElement;
  
     const errorka=apa.querySelector(".error");
-    errorka.innerHTML="Kötelező!";
+    errorka.innerHTML="Kötelező kivállasztani a háziállatot!";
      result=false;
    }
+
+
    return result;
 
 }
@@ -126,28 +133,21 @@ function rendertable(){
     for(const pers of array){
         const tbody_tr = document.createElement('tr');
         tbody.appendChild(tbody_tr);
-     
-        const tbody_td_lastname = document.createElement('td');
-        tbody_tr.appendChild(tbody_td_lastname);
-       
-        tbody_td_lastname.innerHTML = pers.lastname;
-     
-        const tbody_td_firstname = document.createElement('td');
-        tbody_tr.appendChild(tbody_td_firstname);
-       
-        tbody_td_firstname.innerHTML = pers.firstname1;
-    
-  
+
+
+        createTableCell("td",pers.lastname,tbody_tr);
+        const firstname1_createtablecell= createTableCell("td",pers.firstname1,tbody_tr);
 
         if(pers.firstname2 === undefined){
-            tbody_td_firstname.colSpan = 2;
+            firstname1_createtablecell.colSpan = 2;
         }
         else{
-            const tbody_td_firstname = document.createElement('td');
-            tbody_tr.appendChild(tbody_td_firstname);
-           
-            tbody_td_firstname.innerHTML = pers.firstname2;
+            createTableCell("td",pers.firstname2,tbody_tr);
         }
+
+
+
+        
         tbody_tr.addEventListener('click', function(e){
             //console.log('clicked');
             const selected = tbody.querySelector('.selected');
@@ -160,20 +160,9 @@ function rendertable(){
               
         })
     
-        const td_married= document.createElement('td');
-        tbody_tr.appendChild(td_married);
-        td_married.innerHTML = pers.married;
-    
-        const td_pet= document.createElement('td');
-        tbody_tr.appendChild(td_pet);
-        td_pet.innerHTML = pers.pet;
-    
-        if(pers.married===true){
-            td_married.innerHTML="Igen"
-        }
-        else{
-            td_married.innerHTML="Nem"
-        }
+        createTableCell("td", pers.married ? "Igen" : "Nem", tbody_tr );
+        createTableCell("td", pers.pet, tbody_tr);
+
      
 
      
